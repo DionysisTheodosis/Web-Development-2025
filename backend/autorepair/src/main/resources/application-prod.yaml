@@ -1,0 +1,37 @@
+# Production specific configuration (activated when 'prod' profile is active)
+spring:
+  data:
+    redis:
+      # Use environment variables, provide sensible defaults if applicable
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      # password: ${REDIS_PASSWORD} # Uncomment if your prod Redis requires a password
+  datasource:
+    # Construct URL from environment variables
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:car-repair}?serverTimezone=UTC&useSSL=false
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+
+  # --- Prod JPA/Hibernate Settings ---
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false
+
+  # --- Prod Docker Compose Integration ---
+  docker:
+    compose:
+      enabled: false
+
+  # --- Prod Springdoc / Swagger UI ---
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+# --- Prod Logging ---
+logging:
+  level:
+    root: INFO

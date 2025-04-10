@@ -1,0 +1,36 @@
+# Development specific configuration (activated when 'dev' profile is active)
+spring:
+  data:
+    redis:
+      host: redis
+      port: 6379
+  datasource:
+    url: jdbc:mysql://mysql:3306/car-repair
+    username: root
+    password: password
+
+  # --- Dev JPA/Hibernate Settings ---
+  jpa:
+    show-sql: true
+    open-in-view: true
+
+  # --- Dev Docker Compose Integration ---
+  docker:
+    compose:
+      lifecycle-management: start_only
+      enabled: true
+
+  # --- Dev Springdoc / Swagger UI ---
+springdoc:
+  api-docs:
+    enabled: true  # Indented under api-docs
+  swagger-ui:
+    enabled: true  # Indented under swagger-ui
+
+# --- Dev Logging ---
+logging:
+  level:
+    org.springframework.web: TRACE
+    org.hibernate.SQL: TRACE
+  file:
+    name: logs/autorepair-dev.log

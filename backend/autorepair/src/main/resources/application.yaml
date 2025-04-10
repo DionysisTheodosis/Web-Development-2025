@@ -1,0 +1,42 @@
+# Base configuration common to all environments
+spring:
+  profiles:
+    active: dev
+  application:
+    name: autorepair # Application name is common
+
+  # --- Common Data Source Properties ---
+  datasource:
+    # Driver class is the same everywhere
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # --- Common JPA/Hibernate Settings ---
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      # Naming strategies are typically consistent
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  # --- Common Spring Session Redis Settings ---
+  session:
+    redis:
+      namespace: spring:session
+      cleanup-cron: "0 * * * * *"
+      configure-action: notify_keyspace_events
+      flush-mode: immediate
+      repository-type: indexed
+
+# --- Common Server Settings ---
+server:
+  servlet:
+    session:
+      timeout: 15m
+      cookie:
+        max-age: 60m
+
+# --- Default Logging Configuration ---
+logging:
+  level:
+    root: INFO
