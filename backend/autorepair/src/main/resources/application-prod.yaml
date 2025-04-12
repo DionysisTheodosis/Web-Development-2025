@@ -34,4 +34,8 @@ springdoc:
 # --- Prod Logging ---
 logging:
   level:
+    org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: error
     root: INFO
+
+JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+isHttpsEnabled : true

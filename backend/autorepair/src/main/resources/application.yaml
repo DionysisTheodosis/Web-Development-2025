@@ -19,15 +19,6 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
-  # --- Common Spring Session Redis Settings ---
-  session:
-    redis:
-      namespace: spring:session
-      cleanup-cron: "0 * * * * *"
-      configure-action: notify_keyspace_events
-      flush-mode: immediate
-      repository-type: indexed
-
 # --- Common Server Settings ---
 server:
   servlet:
@@ -39,4 +30,7 @@ server:
 # --- Default Logging Configuration ---
 logging:
   level:
+    org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: error
     root: INFO
+
+frontend: http://192.168.1.2:8080

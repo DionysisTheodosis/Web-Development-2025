@@ -30,7 +30,20 @@ springdoc:
 # --- Dev Logging ---
 logging:
   level:
-    org.springframework.web: TRACE
-    org.hibernate.SQL: TRACE
+    org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: error
+    org:
+      springframework:
+        web: DEBUG
+        security: DEBUG
+      hibernate:
+        SQL: DEBUG
+
   file:
     name: logs/autorepair-dev.log
+
+openapi:
+  server:
+    url: http://192.168.1.2:8080
+
+JWT_SECRET_KEY: HEVSvTQ21+BIvaeTQBlV5LVFSczW9QGLp3QgikovoGI=
+isHttpsEnabled : false
