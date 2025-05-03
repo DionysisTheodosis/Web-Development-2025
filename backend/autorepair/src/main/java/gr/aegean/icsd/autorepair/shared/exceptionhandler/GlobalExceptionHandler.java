@@ -1,7 +1,9 @@
 package gr.aegean.icsd.autorepair.shared.exceptionhandler;
 
 
+import gr.aegean.icsd.autorepair.shared.exception.*;
 import gr.aegean.icsd.autorepair.shared.security.TokenExpiredException;
+import gr.aegean.icsd.autorepair.user.UserAlreadyExistsException;
 import jakarta.persistence.OptimisticLockException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpServerErrorException;
 
 @Slf4j
 @ControllerAdvice
@@ -98,33 +101,33 @@ public class GlobalExceptionHandler {
 //        return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
 //    }
 //
-//    @ExceptionHandler(UserAlreadyExistsException.class)
-//    @ResponseStatus(HttpStatus.CONFLICT)
-//    public @ResponseBody ErrorResponse handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
-//        log.info(ex.getMessage());
-//        return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
-//    }
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public @ResponseBody ErrorResponse handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
+        log.info(ex.getMessage());
+        return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(NoChangesDetectedException.class)
+    @ResponseStatus(HttpStatus.NOT_MODIFIED)
+    public @ResponseBody ErrorResponse handleNoChangesDetectedException(NoChangesDetectedException ex) {
+        log.info(ex.getMessage());
+        return new ErrorResponse(HttpStatus.NOT_MODIFIED.value(), ex.getMessage());
+    }
 //
-//    @ExceptionHandler(NoChangesDetectedException.class)
-//    @ResponseStatus(HttpStatus.NOT_MODIFIED)
-//    public @ResponseBody ErrorResponse handleNoChangesDetectedException(NoChangesDetectedException ex) {
-//        log.info(ex.getMessage());
-//        return new ErrorResponse(HttpStatus.NOT_MODIFIED.value(), ex.getMessage());
-//    }
+    @ExceptionHandler(InvalidFileTypeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody ErrorResponse handleInvalidFileTypeException(InvalidFileTypeException ex) {
+        log.info(ex.getMessage());
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+    }
 //
-//    @ExceptionHandler(InvalidFileTypeException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public @ResponseBody ErrorResponse handleInvalidFileTypeException(InvalidFileTypeException ex) {
-//        log.info(ex.getMessage());
-//        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
-//    }
-//
-//    @ExceptionHandler(ParsingFileIOException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public @ResponseBody ErrorResponse handleParsingFileIOException(ParsingFileIOException ex) {
-//        log.info(ex.getMessage());
-//        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
-//    }
+    @ExceptionHandler(ParsingFileIOException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody ErrorResponse handleParsingFileIOException(ParsingFileIOException ex) {
+        log.info(ex.getMessage());
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+    }
 //
 //    @ExceptionHandler(MedicalHistoryNotFoundException.class)
 //    @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -156,37 +159,38 @@ public class GlobalExceptionHandler {
 //        return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
 //    }
 //
-//    @ExceptionHandler(EntityAlreadyExistsException.class)
-//    @ResponseStatus(HttpStatus.CONFLICT)
-//    public @ResponseBody ErrorResponse handleEntityAlreadyExistsException(
-//            EntityAlreadyExistsException ex) {
-//        log.info(ex.getMessage());
-//        return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
-//    }
-//
-//    @ExceptionHandler(NoEntriesException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public @ResponseBody ErrorResponse handleNoEntriesException(
-//            NoEntriesException ex) {
-//        log.info(ex.getMessage());
-//        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
-//    }
-//
-//    @ExceptionHandler(InvalidParamsException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public @ResponseBody ErrorResponse handleInvalidParamsException(
-//            InvalidParamsException ex) {
-//        log.info(ex.getMessage());
-//        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
-//    }
-//
-//    @ExceptionHandler(UnsupportedFileTypeException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public @ResponseBody ErrorResponse handleUnsupportedFileTypeException(
-//            UnsupportedFileTypeException ex) {
-//        log.info(ex.getMessage());
-//        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
-//    }
+
+    @ExceptionHandler(EntityAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public @ResponseBody ErrorResponse handleEntityAlreadyExistsException(
+            EntityAlreadyExistsException ex) {
+        log.info(ex.getMessage());
+        return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(NoEntriesException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody ErrorResponse handleNoEntriesException(
+            NoEntriesException ex) {
+        log.info(ex.getMessage());
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(InvalidParamsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody ErrorResponse handleInvalidParamsException(
+            InvalidParamsException ex) {
+        log.info(ex.getMessage());
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(UnsupportedFileTypeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody ErrorResponse handleUnsupportedFileTypeException(
+            UnsupportedFileTypeException ex) {
+        log.info(ex.getMessage());
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+    }
 //
 //    @ExceptionHandler(DoctorAvailabilityNotFoundException.class)
 //    @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -204,21 +208,21 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
 
-//    @ExceptionHandler(InvalidOperationException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public @ResponseBody ErrorResponse handleInvalidOperationException(
-//            InvalidOperationException ex) {
-//        log.info(ex.getMessage());
-//        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
-//    }
-//
-//    @ExceptionHandler(UnauthorizedAccessException.class)
-//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-//    public @ResponseBody ErrorResponse handleUnauthorizedAccessException(
-//            UnauthorizedAccessException ex) {
-//        log.info(ex.getMessage());
-//        return new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), ex.getMessage());
-//    }
+    @ExceptionHandler(InvalidOperationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody ErrorResponse handleInvalidOperationException(
+            InvalidOperationException ex) {
+        log.info(ex.getMessage());
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(UnauthorizedAccessException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public @ResponseBody ErrorResponse handleUnauthorizedAccessException(
+            UnauthorizedAccessException ex) {
+        log.info(ex.getMessage());
+        return new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), ex.getMessage());
+    }
 //
 //    @ExceptionHandler(AppointmentNotFoundException.class)
 //    @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -259,6 +263,12 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), ErrorCode.ERROR_ACCOUNT_LOCKED);
     }
 
-
+    @ExceptionHandler(EntitySavingException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public @ResponseBody ErrorResponse handleEntitySavingException(
+            EntitySavingException ex) {
+        log.info(ex.getMessage());
+        return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
+    }
 
 }

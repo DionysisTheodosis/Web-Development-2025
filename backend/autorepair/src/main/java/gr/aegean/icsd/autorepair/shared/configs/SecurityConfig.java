@@ -43,7 +43,7 @@ public class SecurityConfig{
         http.authorizeHttpRequests(
                 request -> {
                     request.requestMatchers(  "/", "/signup/**","/api/v1/auth/isSignIn" ,"/api/v1/auth/user-role",
-                            "/v3/api-docs","/v3/api-docs/**","/c","/swagger-ui/**","/api/v1/session-cookie","/api/v1/auth/valid/secretary").permitAll();
+                            "/v3/api-docs","/v3/api-docs/**","/c","/swagger-ui/**","/api/v1/session-cookie","/api/v1/auth/valid/secretary","/error").permitAll();
                     request.requestMatchers("/api/v1/auth/login","/api/v1/auth/register").anonymous();
                     request.requestMatchers("/api/v1/auth/name","/api/v1/auth/logout","/api/v1/appointments/**","/api/v1/users","/api/v1/users/**","/api/v1/session-cookie").hasAnyAuthority("CUSTOMER","MECHANIC","SECRETARY");
                     request.requestMatchers("/**").hasAuthority(UserRole.SECRETARY.name());

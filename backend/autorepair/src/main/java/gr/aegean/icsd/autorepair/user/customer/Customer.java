@@ -3,7 +3,6 @@ package gr.aegean.icsd.autorepair.user.customer;
 import gr.aegean.icsd.autorepair.appointment.Appointment;
 import gr.aegean.icsd.autorepair.car.Car;
 import gr.aegean.icsd.autorepair.user.User;
-import gr.aegean.icsd.autorepair.user.UserDetailsDto;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

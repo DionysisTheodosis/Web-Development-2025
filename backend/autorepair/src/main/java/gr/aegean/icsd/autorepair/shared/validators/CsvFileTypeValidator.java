@@ -19,14 +19,14 @@ public class CsvFileTypeValidator implements ConstraintValidator<ValidCsvFileTyp
 
         String contentType = file.getContentType();
 
-        // Validate content type
+
         boolean isValidContentType = "text/csv".equals(contentType) || "application/csv".equals(contentType);
 
-        // Optional: Check for file extension if needed
+
         String fileName = file.getOriginalFilename();
         boolean hasCsvExtension = fileName != null && fileName.toLowerCase().endsWith(".csv");
 
-        // Return true if either the content type is valid or the extension is CSV
+
         return isValidContentType || hasCsvExtension;
     }
 }

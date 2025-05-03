@@ -5,6 +5,7 @@ import gr.aegean.icsd.autorepair.shared.security.LoginRequestDto;
 import gr.aegean.icsd.autorepair.shared.utils.AuthUtils;
 import gr.aegean.icsd.autorepair.user.UserRegistrationDto;
 import gr.aegean.icsd.autorepair.user.UserRole;
+import gr.aegean.icsd.autorepair.user.UserService;
 import gr.aegean.icsd.autorepair.user.customer.CustomerRegistrationDto;
 import gr.aegean.icsd.autorepair.user.customer.CustomerService;
 import gr.aegean.icsd.autorepair.user.mechanic.MechanicRegistrationDto;
@@ -28,6 +29,7 @@ public class AuthService {
     private final AuthUtils authUtils;
     private final MechanicService mechanicService;
     private final CustomerService customerService;
+    private final UserService userService;
 
     public String authenticateAndSetToken(LoginRequestDto dto, HttpServletResponse response) {
 
@@ -59,12 +61,7 @@ public class AuthService {
     }
 
     public void registerUser(UserRegistrationDto dto) {
-        if(dto.getRole().equalsIgnoreCase(UserRole.CUSTOMER.name())) {
-            customerService.addCustomer((CustomerRegistrationDto) dto);
-        }
-        else if(dto.getRole().equalsIgnoreCase(UserRole.MECHANIC.name())) {
-            mechanicService.addMechanic((MechanicRegistrationDto) dto);
-        }
+        userService.saveUser(dto);
     }
 
     public void revokeToken(HttpServletResponse response) {
