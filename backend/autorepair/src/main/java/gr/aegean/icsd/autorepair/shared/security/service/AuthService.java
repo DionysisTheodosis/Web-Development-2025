@@ -3,12 +3,9 @@ package gr.aegean.icsd.autorepair.shared.security.service;
 import gr.aegean.icsd.autorepair.shared.security.InvalidCredentialsException;
 import gr.aegean.icsd.autorepair.shared.security.LoginRequestDto;
 import gr.aegean.icsd.autorepair.shared.utils.AuthUtils;
-import gr.aegean.icsd.autorepair.user.UserRegistrationDto;
 import gr.aegean.icsd.autorepair.user.UserRole;
 import gr.aegean.icsd.autorepair.user.UserService;
-import gr.aegean.icsd.autorepair.user.customer.CustomerRegistrationDto;
 import gr.aegean.icsd.autorepair.user.customer.CustomerService;
-import gr.aegean.icsd.autorepair.user.mechanic.MechanicRegistrationDto;
 import gr.aegean.icsd.autorepair.user.mechanic.MechanicService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +26,6 @@ public class AuthService {
     private final AuthUtils authUtils;
     private final MechanicService mechanicService;
     private final CustomerService customerService;
-    private final UserService userService;
 
     public String authenticateAndSetToken(LoginRequestDto dto, HttpServletResponse response) {
 
@@ -47,6 +43,9 @@ public class AuthService {
         return "Authentication successful.";
     }
 
+    public String getAuthenticatedUsername() {
+        return authUtils.getAuthenticatedUsername();
+    }
 
     public Boolean validateLoggedInMechanic() {
         return UserRole.MECHANIC.name().equals(authUtils.getAuthenticatedUserRole());
@@ -60,11 +59,9 @@ public class AuthService {
         return UserRole.CUSTOMER.name().equals(authUtils.getAuthenticatedUserRole());
     }
 
-    public void registerUser(UserRegistrationDto dto) {
-        userService.saveUser(dto);
-    }
 
     public void revokeToken(HttpServletResponse response) {
         jwtService.clearJwtCookie(response);
     }
+
 }
