@@ -1,0 +1,31 @@
+# Base configuration common to all environments
+spring:
+  profiles:
+    active: dev
+  application:
+    name: autorepair # Application name is common
+
+  datasource:
+
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+server:
+  servlet:
+    session:
+      timeout: 15m
+      cookie:
+        max-age: 60m
+
+logging:
+  level:
+    org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: error
+    root: INFO
+
+frontend: ${frontend}

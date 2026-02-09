@@ -1,0 +1,7 @@
+Username,Email,Password,FirstName,LastName,IdentityNumber,Role,TaxNumber,Address,Specialty
+user1,user1@example.com,Pass123@!,John,Doe,AB123456,customer,TAX1234,123 Main St,
+user2,user2@example.com,Pass456@!,Jane,Smith,CD789012,mechanic,,Computer Engineer
+user3,user3@example.com,Pass789@!,Alice,Johnson,EF246802,customer,TAX5678,456 Oak Ave,
+user4,user4@example.com,Pass101@!,Bob,Williams,GH135791,mechanic,c,c,Electrician
+user5,user5@example.com,Pass202@!,Charlie,Brown,IJ987654,customer,TAX9012,789 Pine Ln,
+user6,user6@example.com,Pass303@!,David,Davis,KL432108,mechanic,c,c,Plumber
