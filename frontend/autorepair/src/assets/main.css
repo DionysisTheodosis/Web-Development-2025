@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer tailwind-base, primevue, tailwind-utilities;
+
+@layer tailwind-base {
+  @tailwind base;
+
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+:root {
+
+  --y-component-background: rgba(255, 255, 255, 0) !important;
+  --y-component-border: none !important;
+  --p-menubar-background: var(--y-component-background) !important;
+  --p-menubar-border: var(--y-component-border) !important;
+  --p-menubar-border-color: transparent !important;
+  --p-drawer-background: var(--y-component-background) !important;
+  --p-drawer-border: var(--y-component-border) !important;
+  --p-drawer-border-color: transparent !important;
+}
+
